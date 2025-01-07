@@ -1,0 +1,103 @@
+<?php
+
+
+use Utils\JwtHandler;
+use Firebase\JWT\JWT;
+
+
+require "web.php";
+require "clientApi.php";
+
+
+
+
+Flight::route('POST /auth', function() {
+    // Obtener datos del cuerpo de la solicitud (por ejemplo, email y password)
+    $data = json_decode(Flight::request()->getBody(), true);
+
+    // Verificar si los datos fueron decodificados correctamente
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        Flight::halt(400, json_encode(["message" => "Invalid JSON format"]));
+    }
+
+    // Verificar si los campos 'email' y 'password' están presentes
+    if (!isset($data['email']) || !isset($data['password'])) {
+        Flight::halt(400, json_encode(["message" => "Email and password are required"]));
+    }
+
+    // Validar las credenciales (esto puede ser más complejo dependiendo de tu lógica)
+    if ($data['email'] == $_ENV['USERNAME'] && $data['password'] == $_ENV['PASSWORD']) {
+        // Aquí normalmente validas contra tu base de datos
+        $user = [
+            "id" => 1,
+            "email" => $data['email'],
+            "name" => "Amodoritos con queso"
+        ];
+
+        // Genera el token JWT
+        $key = "your_secret_key"; // Clave secreta
+        $token = JwtHandler::encode($user);
+
+        // Almacenar el token en la sesión PHP
+        session_start();
+        $_SESSION['jwt_token'] = $token;
+
+        // Devuelve el mensaje de login exitoso con la ruta protegida
+        Flight::json(["message" => "Login exitoso", "path" => "/base", "token" => $token]);
+    } else {
+        // Credenciales incorrectas
+        Flight::halt(401, json_encode(["message" => "Credenciales incorrectas"]));
+    }
+});
+
+Flight::route('GET /logout', function() {
+    // Iniciar la sesión para acceder a las variables de sesión
+    session_start();
+
+    // Eliminar el token JWT de la sesión
+    if (isset($_SESSION['jwt_token'])) {
+        unset($_SESSION['jwt_token']);
+    }
+
+    // Opcional: Destruir toda la sesión
+    session_destroy();
+
+    // Responder al cliente indicando que el logout fue exitoso
+    // Flight::json(["message" => "Logout exitoso"]);
+    Flight::render('login.php', ['title' => 'Login del amor']);
+}); 
+
+
+Flight::before('start', function() {
+    // Las rutas que no requieren verificación de token
+    $allowedRoutes = ['/auth', '/login'];
+
+    // Obtiene la ruta actual
+    $currentRoute = Flight::request()->url;
+
+    // Si la ruta actual es /login, no hacer la verificación de token
+    if (in_array($currentRoute, $allowedRoutes)) {
+        return;  // No hacer nada más y permitir la solicitud
+    }
+
+    // Si la ruta no es /login, proceder con la verificación del token en sesión
+    session_start();
+
+    // Verificar si hay un token almacenado en la sesión
+    if (!isset($_SESSION['jwt_token'])) {
+        Flight::halt(401, json_encode(["message" => "Token missing"]));
+    }
+
+    // Obtener el token de la sesión
+    $token = $_SESSION['jwt_token'];
+
+    // Decodificar el token JWT
+    $userData = JwtHandler::decode($token);
+
+    if (!$userData) {
+        Flight::render('login.php', ['title' => 'Login del amor']);
+    }
+
+    // Si el token es válido, asignar el usuario a la sesión de Flight
+    Flight::set('user', $userData);
+});
