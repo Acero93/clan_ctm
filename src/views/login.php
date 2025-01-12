@@ -8,11 +8,11 @@
 <body>
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card p-4 shadow" style="width: 25rem;">
-            <h2 class="text-center mb-4">Login del Amor</h2>
+            <h2 class="text-center mb-4">Login CTM</h2>
             <form id="loginForm">
                 <div class="mb-3">
                     <label for="email" class="form-label">Usuario</label>
-                    <input type="email" class="form-control" id="email" name="email" required placeholder="Ingresa tu usuario" value="amorcito@amor.cl">
+                    <input type="email" class="form-control" id="email" name="email" required placeholder="Ingresa tu usuario" value="">
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Contraseña</label>

@@ -7,8 +7,7 @@ use Firebase\JWT\JWT;
 
 require "web.php";
 require "clientApi.php";
-
-
+require "HLLServerApi.php";
 
 
 Flight::route('POST /auth', function() {
@@ -68,36 +67,37 @@ Flight::route('GET /logout', function() {
 }); 
 
 
+
+
 Flight::before('start', function() {
     // Las rutas que no requieren verificación de token
-    $allowedRoutes = ['/auth', '/login'];
+    $allowedRoutes = [
+        '/get_hll_sv_status',
+        '/auth', 
+        '/login',
+        '/',
+        '/CTM'
+    ];
 
-    // Obtiene la ruta actual
     $currentRoute = Flight::request()->url;
 
-    // Si la ruta actual es /login, no hacer la verificación de token
     if (in_array($currentRoute, $allowedRoutes)) {
-        return;  // No hacer nada más y permitir la solicitud
+        return;  
     }
 
-    // Si la ruta no es /login, proceder con la verificación del token en sesión
     session_start();
 
-    // Verificar si hay un token almacenado en la sesión
+ 
     if (!isset($_SESSION['jwt_token'])) {
         Flight::halt(401, json_encode(["message" => "Token missing"]));
     }
 
-    // Obtener el token de la sesión
     $token = $_SESSION['jwt_token'];
-
-    // Decodificar el token JWT
     $userData = JwtHandler::decode($token);
 
     if (!$userData) {
         Flight::render('login.php', ['title' => 'Login del amor']);
     }
 
-    // Si el token es válido, asignar el usuario a la sesión de Flight
     Flight::set('user', $userData);
 });

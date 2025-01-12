@@ -5,6 +5,20 @@ Flight::set('flight.views.path', dirname(__DIR__) . '/views');
 
 
 // Rutas de ejemplo
+
+
+Flight::route('GET /', function() {
+
+    Flight::render('landing/landing.php', ['title' => 'Inicio', 'js' => 'clients.js']);
+    // Flight::render('layout/sidebar', );
+});
+
+Flight::route('GET /CTM', function() {
+
+    Flight::render('main.php', ['title' => 'Inicio', 'js' => 'clients.js']);
+    // Flight::render('layout/sidebar', );
+});
+
 Flight::route('GET /base', function() {
 
     Flight::render('base.php', ['title' => 'Inicio', 'js' => 'clients.js']);
