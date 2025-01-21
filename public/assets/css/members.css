@@ -1,0 +1,44 @@
+/* Estilo para la tabla en modo oscuro */
+.tabulator {
+    background-color: #343a40; /* Fondo oscuro */
+    color: #f8f9fa; /* Texto claro */
+    border: 1px solid #495057; /* Bordes oscuros */
+}
+
+/* Cabecera */
+.tabulator-header {
+    background-color: #495057; /* Fondo de cabecera */
+    color: #f8f9fa; /* Texto claro */
+}
+
+/* Filas */
+.tabulator-row {
+    background-color: #343a40; /* Fondo oscuro para filas */
+    color: #144b83; /* Texto claro */
+}
+
+.tabulator-row:nth-child(even) {
+    background-color: #3c4349; /* Fondo ligeramente más claro para filas pares */
+}
+
+/* Filas al pasar el mouse */
+.tabulator-row:hover {
+    background-color: #495057; /* Fondo más claro al hacer hover */
+}
+
+/* Filtros en la cabecera */
+.tabulator-header-filter input {
+    background-color: #495057; /* Fondo oscuro para los filtros */
+    color: #f8f9fa; /* Texto claro */
+    border: 1px solid #6c757d; /* Bordes */
+}
+
+/* Paginación */
+.tabulator-paginator {
+    /* background-color: #495057; 
+    color: #f8f9fa;  */
+}
+
+.tabulator .tabulator-footer .tabulator-page.active {
+    color: white!important;
+}

@@ -6,8 +6,9 @@ use Firebase\JWT\JWT;
 
 
 require "web.php";
-require "clientApi.php";
+require "MemberApi.php";
 require "HLLServerApi.php";
+require "CTMWebAPI.php";
 
 
 Flight::route('POST /auth', function() {
@@ -76,7 +77,8 @@ Flight::before('start', function() {
         '/auth', 
         '/login',
         '/',
-        '/CTM'
+        '/CTM',
+        '/miembrosCTM',
     ];
 
     $currentRoute = Flight::request()->url;
@@ -86,17 +88,17 @@ Flight::before('start', function() {
     }
 
     session_start();
-
  
+    
     if (!isset($_SESSION['jwt_token'])) {
-        Flight::halt(401, json_encode(["message" => "Token missing"]));
+        Flight::halt(401, json_encode(["message" => "Falta token"]));
     }
 
     $token = $_SESSION['jwt_token'];
     $userData = JwtHandler::decode($token);
 
     if (!$userData) {
-        Flight::render('login.php', ['title' => 'Login del amor']);
+        Flight::render('login.php', ['title' => 'Login CTM']);
     }
 
     Flight::set('user', $userData);

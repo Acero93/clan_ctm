@@ -1,0 +1,118 @@
+.hero-section {
+    border-radius: 29%;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    background: rgba(0, 0, 0, 0.7); /* Optional overlay */
+    padding: 20px;
+}
+
+.descrip_1 {
+    font-weight: bold;
+    color: #e1a0a0;
+}
+ 
+.social-icons {
+
+    margin-left: 5rem;
+}
+
+
+.hero-section h1 {
+    margin-left: 5rem;
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    margin: 20px 5rem;
+}
+
+.hero-buttons .btn {
+    margin-left: 5rem;
+    margin-right: 10px;
+}
+
+.social-icons a {
+    margin: 0 10px;
+    font-size: 1.5rem;
+    color: white;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: #ff4c4c;
+}
+
+.discord-btn {
+    /* position: absolute; */
+    margin-top: 3rem;
+    bottom: 20px;
+    right: 20px;
+    background-color: #5865F2;
+    color: white;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 1rem;
+}
+
+.discord-btn:hover {
+    background-color: #4753C4;
+}
+
+
+/* MIEMBROS */
+
+body {
+    background-color: #121212;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.players-section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.players-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+.player-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 10px;
+    transition: transform 0.3s;
+    position: relative;
+}
+
+.player-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.player-avatar:hover {
+    transform: scale(1.1);
+}
+
+.view-more-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #5865F2;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+}
+
+.view-more-btn:hover {
+    background-color: #4753C4;
+}
