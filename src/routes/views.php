@@ -29,13 +29,13 @@ Flight::route('GET /base', function() {
         'content' =>$membersView , 
         'footer' => $footerView,
         'styles' => [
-            '/assets/css/members.css',
+            'public/assets/css/members.css',
             'https://cdnjs.cloudflare.com/ajax/libs/tabulator/6.3.0/css/tabulator_bootstrap5.min.css',
             'https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css',
         ],
         'scripts' => [
             'https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js', // Librería necesaria para esta vista
-            '/assets/js/members.js',
+            'public/assets/js/members.js',
         ]
     ]);
 

@@ -34,6 +34,7 @@
         }
     </style>
     <base href="<?= getBaseUrl() ?>">
+
 </head>
 <body>
     <header>

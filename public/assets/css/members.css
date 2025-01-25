@@ -42,3 +42,7 @@
 .tabulator .tabulator-footer .tabulator-page.active {
     color: white!important;
 }
+
+span {
+    font-weight: bold;
+}
