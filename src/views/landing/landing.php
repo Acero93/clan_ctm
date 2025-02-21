@@ -8,6 +8,9 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- AOS CSS -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <!-- Estilos personalizados -->
   <style>
     body {
@@ -44,6 +47,44 @@
     .btn-primary:hover {
       background-color: #ff1a1a;
     }
+
+
+    /* Estilo personalizado para el botón de Discord */
+    .btn-discord {
+        background-color: #5865F2; /* Color oficial de Discord */
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 1rem;
+        /* display: block;  */
+        margin: 0 auto; /* Centrar horizontalmente */
+        text-align: center;
+        width: fit-content; /* Ajustar el ancho al contenido */
+        transition: background-color 0.3s ease;
+        text-decoration: none; /* Elimina el subrayado */
+    }
+    .btn-discord:hover {
+        background-color: #4752C4; /* Color más oscuro al pasar el mouse */
+    }
+
+        /* Estilo para el botón "Contribuir a la causa" */
+    .btn-contribute {
+        background-color: #28a745; /* Verde llamativo */
+        color: #fff;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 5px;
+        font-size: 1rem;
+        margin-left: 10px; /* Espacio entre los botones */
+        transition: background-color 0.3s ease;
+        text-decoration: none; /* Elimina el subrayado */
+    }
+    .btn-contribute:hover {
+        background-color: #218838; /* Verde más oscuro al pasar el mouse */
+        text-decoration: none; /* Asegura que no haya subrayado al pasar el mouse */
+    }
+
   </style>
 </head>
 <body>
@@ -57,18 +98,22 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#features">Características</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#gallery">Galería</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#testimonials">Testimonios</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link btn btn-primary" href="#join">Únete Ahora</a>
-          </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#features">Características</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#gallery">Galería</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#testimonials">Testimonios</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link btn btn-primary" href="#join">Únete Ahora</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link btn btn-contribute" href="#contribuir">Contribuir a la causa</a>
+            </li>
         </ul>
       </div>
     </div>
@@ -186,7 +231,10 @@
               <li>🎉 Eventos exclusivos para miembros.</li>
             </ul>
             <p>¡Únete ahora y forma parte de la diversión!</p>
-            <a href="https://discord.gg/TU_ENLACE_DE_INVITACION" class="btn btn-primary">Únete a Discord</a>
+              <!-- Botón de Discord -->
+            <a href="https://discord.gg/TU_ENLACE_DE_INVITACION" class="btn-discord">
+                <i class="fab fa-discord"></i> Únete a Discord
+            </a>
           </div>
         </div>
       </div>
