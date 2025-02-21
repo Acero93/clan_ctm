@@ -1,7 +1,7 @@
 <?php
 
 namespace Controllers;
-use Models\MemberModel;
+use Models\TacticalModel;
 use Flight;
 
 
@@ -9,13 +9,13 @@ class MemberController {
 
     // Obtener todos los clientes
     public function getAllMembers() {
-        $members = MemberModel::getAll();
+        $members = TacticalModel::getAll();
         Flight::json($members);
     }
 
     // Obtener un cliente por ID
     public function getMemberById($id , $api = true) {
-        $member = MemberModel::getById($id);
+        $member = TacticalModel::getById($id);
         if ($member->id) {
             if (!$api) {
                 return $member->export();

@@ -32,16 +32,58 @@ class HLLController {
     }
 
 
-    public function getServerData () {
-        $data       = Flight::request()->data;
-        $endpoint   = $data["endpoint"];
-        $url        = "{$endpoint}/api/get_public_info";
-        $response   = file_get_contents($url);
+    // public function getServerData () {
+    //     $data       = Flight::request()->data;
+    //     $endpoint   = $data["endpoint"];
+    //     $url        = "{$endpoint}/api/get_public_info";
+    //     $response   = file_get_contents($url);
         
-        if ($response !== false) {
-            Flight::json(["success" => true, "status" => "success","message" => json_decode($response,true)]);
-        }
+    //     if ($response !== false) {
+    //         Flight::json(["success" => true, "status" => "success","message" => json_decode($response,true)]);
+    //     }
 
+    // }
+
+
+    public function getServerData() {
+        // Obtener los datos de la solicitud
+        $data = Flight::request()->data;
+        $endpoint = $data["endpoint"];
+        $url = "{$endpoint}/api/get_public_info";
+    
+        // Crear un cliente Guzzle
+        $client = new Client();
+    
+        try {
+            // Realizar la solicitud GET
+            $response = $client->get($url);
+    
+            // Obtener el cuerpo de la respuesta
+            $responseBody = $response->getBody()->getContents();
+    
+            // Devolver una respuesta exitosa
+            Flight::json([
+                "success" => true,
+                "status" => "success",
+                "message" => json_decode($responseBody, true)
+            ]);
+        } catch (RequestException $e) {
+            // Manejar errores de la solicitud
+            if ($e->hasResponse()) {
+                $errorResponse = $e->getResponse()->getBody()->getContents();
+                Flight::json([
+                    "success" => false,
+                    "status" => "error",
+                    "message" => json_decode($errorResponse, true)
+                ]);
+            } else {
+                Flight::json([
+                    "success" => false,
+                    "status" => "error",
+                    "message" => "Error al conectar con el servidor: " . $e->getMessage()
+                ]);
+            }
+        }
     }
 
     public function getPlayerList ($raw  = false) {

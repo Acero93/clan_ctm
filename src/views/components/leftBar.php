@@ -11,7 +11,14 @@
             'path' => '/miembros',
             'children' => [
                 ['name' => 'Ver Miembros', 'path' => '/Miembros/ver'],
-                ['name' => 'Agregar Cliente', 'path' => '/Miembros/agregar'],
+                // ['name' => 'Agregar Cliente', 'path' => '/Miembros/agregar'],
+            ]
+        ],
+        [
+            'name' => 'Herramientas',
+            'path' => '/herramientas',
+            'children' => [
+                ['name' => 'Mapa táctico', 'path' => '/herramientas/mapa_tactico'],
             ]
         ],
         [

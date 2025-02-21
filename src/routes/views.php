@@ -148,3 +148,20 @@ Flight::route('GET /miembrosCTM', function() {
         'scripts' => ["/assets/js/main/members.js"]
     ]);
 }); 
+
+
+Flight::route('GET /herramientas/mapa_tactico', function() {
+
+    $content = "mapa/mapa_tactico.php";
+
+
+    Flight::render('base.php', [
+        'title' => 'Mapa Táctico', 
+        'active' => 'CTM',
+        'content' =>$content,
+        'styles' => ["../public/assets/css/main/styles.css"],
+        'scripts' => ["assets/js/mapa_tactico.js"]
+    ]);
+}); 
+
+

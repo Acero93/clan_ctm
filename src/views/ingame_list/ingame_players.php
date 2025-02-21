@@ -81,6 +81,7 @@ $endpoint_3 = $_ENV['SV3'];
 
         obtenerServerData(endpoint);
 
+
         fetchRequest('/get_player_list', { endpoint: endpoint })
         .then(data => {
 
@@ -99,7 +100,7 @@ $endpoint_3 = $_ENV['SV3'];
                             // Botones personalizados
                             return `
                             <button class="btn btn-sm btn-warning kick-btn">Kick</button>
-                            
+                            <button class="btn btn-sm btn-warning ban-btn">Ban</button>
                             <button class="btn btn-sm btn-danger msg-btn">Msg</button>
                             `;
                         },
@@ -463,7 +464,7 @@ $endpoint_3 = $_ENV['SV3'];
     document.addEventListener('DOMContentLoaded', function () {
 
         ejecutarFuncion(servidorEndpoint);
-        setInterval(obtenerInfoSV, 10000);
+        // setInterval(obtenerInfoSV, 10000);
 
     });
 
