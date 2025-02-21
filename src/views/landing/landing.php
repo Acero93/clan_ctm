@@ -244,7 +244,7 @@
   <!-- Footer -->
   <footer class="footer py-4">
     <div class="container text-center">
-      <p>&copy; 2023 Comunidad Gaming. Todos los derechos reservados.</p>
+      <p>&copy; 2025 Comunidad U-235. Todos los derechos reservados.</p>
       <div class="social-links">
         <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
         <a href="#" class="text-white me-3"><i class="fab fa-discord"></i></a>
