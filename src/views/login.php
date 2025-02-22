@@ -8,7 +8,7 @@
 <body>
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card p-4 shadow" style="width: 25rem;">
-            <h2 class="text-center mb-4">Login CTM</h2>
+            <h2 class="text-center mb-4">Login Uranium</h2>
             <form id="loginForm">
                 <div class="mb-3">
                     <label for="email" class="form-label">Usuario</label>

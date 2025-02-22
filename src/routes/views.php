@@ -22,22 +22,36 @@ Flight::route('GET /', function() {
 
 Flight::route('GET /base', function() {
 
-    $membersView = "ingame_list/ingame_players.php";
+    $view = "events/events.php";
     $footerView = "";
     Flight::render('base.php', [
-        'title' => 'Miembros', 
-        'content' =>$membersView , 
+        'title' => 'Eventos', 
+        'content' =>$view , 
         'footer' => $footerView,
         'styles' => [
-            'public/assets/css/members.css',
             'https://cdnjs.cloudflare.com/ajax/libs/tabulator/6.3.0/css/tabulator_bootstrap5.min.css',
             'https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css',
         ],
         'scripts' => [
             'https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js', // Librería necesaria para esta vista
-            'public/assets/js/members.js',
+         
         ]
     ]);
+
+    // Flight::render('base.php', [
+    //     'title' => 'Miembros', 
+    //     'content' =>$eventsView , 
+    //     'footer' => $footerView,
+    //     'styles' => [
+    //         'public/assets/css/members.css',
+    //         'https://cdnjs.cloudflare.com/ajax/libs/tabulator/6.3.0/css/tabulator_bootstrap5.min.css',
+    //         'https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css',
+    //     ],
+    //     'scripts' => [
+    //         'https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js', // Librería necesaria para esta vista
+         
+    //     ]
+    // ]);
 
 });
 
@@ -119,7 +133,7 @@ Flight::route('GET /login', function() {
 
 
 
-// CTM Web vistas
+//  Web vistas
 
 Flight::route('GET /CTM', function() {
     // Flight::render('main/index.php', ['title' => 'CTM Web']);
@@ -165,3 +179,26 @@ Flight::route('GET /herramientas/mapa_tactico', function() {
 }); 
 
 
+
+
+// EVENTOS
+
+Flight::route('GET /eventos/ver', function() {
+    
+    $view = "events/events.php";
+    $footerView = "";
+    Flight::render('base.php', [
+        'title' => 'Eventos', 
+        'content' =>$view , 
+        'footer' => $footerView,
+        'styles' => [
+            'https://cdnjs.cloudflare.com/ajax/libs/tabulator/6.3.0/css/tabulator_bootstrap5.min.css',
+            'https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css',
+        ],
+        'scripts' => [
+            'https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js', // Librería necesaria para esta vista
+         
+        ]
+    ]);
+
+});

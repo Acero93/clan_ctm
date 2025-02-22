@@ -10,7 +10,15 @@
             'name' => 'Miembros',
             'path' => '/miembros',
             'children' => [
-                ['name' => 'Ver Miembros', 'path' => '/Miembros/ver'],
+                ['name' => 'Ver Miembros', 'path' => '/miembros/ver'],
+                // ['name' => 'Agregar Cliente', 'path' => '/Miembros/agregar'],
+            ]
+        ],
+        [
+            'name' => 'Eventos',
+            'path' => '/eventos',
+            'children' => [
+                ['name' => 'Ver Eventos', 'path' => '/eventos/ver'],
                 // ['name' => 'Agregar Cliente', 'path' => '/Miembros/agregar'],
             ]
         ],

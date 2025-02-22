@@ -15,7 +15,7 @@ require_once 'vendor/autoload.php';
 
 
 
-//require_once 'src/config/init.php';
+require_once 'src/config/init.php';
 
 include 'src/routes/api.php';
 include 'src/routes/views.php';

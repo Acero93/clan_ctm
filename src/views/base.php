@@ -61,7 +61,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
                     <!-- <button class="btn btn-primary" id="toggleSidebar">☰</button> -->
-                    <span class="navbar-brand ms-3">Mi Aplicación</span>
+                    <span class="navbar-brand ms-3">Uranium-235</span>
                 </div>
             </nav>
             <div class="container mt-4">

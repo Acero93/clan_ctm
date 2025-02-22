@@ -9,6 +9,7 @@ use Firebase\JWT\JWT;
 //require "MemberApi.php";
 //require "HLLServerApi.php";
 //require "CTMWebAPI.php";
+require "EventsApi.php";
 
 
 Flight::route('POST /auth', function() {
