@@ -44,4 +44,54 @@ class EventController {
             Flight::halt(404, json_encode(["message" => "No encontrado"]));
         }
     }
+
+
+    public function vote(){
+
+
+        $data       = Flight::request()->data->getData();
+        $result     = EventModel::vote($data);
+        
+        if ($result) {
+            Flight::json(["success" => true, "status" => "success", "message" => "Votación enviada"]);
+        } else {
+            Flight::halt(404, json_encode(["message" => "No encontrado"]));
+        }
+
+    }
+
+    public function attendance(){
+
+        $data       = Flight::request()->data->getData();
+
+
+
+
+        if(empty($data['game_id']) && empty($data['in_game_name'])){
+
+            Flight::json(["success" => false, "status" => "error", "message" => "Faltan datos ID del jugador o Nombre en el juego."]); 
+            return;
+        }
+
+
+
+
+        // print_r(empty($data['game_id']));
+        
+
+
+        $result     = EventModel::attendance($data);
+
+
+        // print_r($result);
+
+        if($result['error']){
+
+            Flight::json(["success" => false, "status" => "error", "message" => $result['message'] ]);
+            return;
+        }
+        
+        Flight::json(["success" => true, "status" => "success", "message" => "Registro enviado"]);
+
+    }
 }

@@ -1,8 +1,5 @@
 <?php
 
-// $endpoint_1 = $_ENV['SV1'];
-// $endpoint_2 = $_ENV['SV2'];
-// $endpoint_3 = $_ENV['SV3'];
 ?>
 
 
@@ -26,25 +23,7 @@
 <?= loadScripts($scripts ?? []) ?>
 <script>
 
-    // const endpointSelector = document.getElementById('endpointSelector');
-    // let servidorEndpoint   = endpointSelector.value;
-    // let servidor;
-    // let servidorInfo;
     let table;
-
-
-
-    // Agregar un evento change al combo
-    // endpointSelector.addEventListener('change', function () {
-    //     servidorEndpoint = this.value;
-    //     ejecutarFuncion(servidorEndpoint); 
-
-    // });
-
-
-    // Definir la función que se ejecutará al cambiar el valor del combo
-
-
 
     async function getEvents(){
 
@@ -75,6 +54,10 @@
                 layout: "fitColumns",
                 pagination: "local",  
                 paginationSize: 15,   
+                rowClick: function(e, row) {
+                    const rowData = row.getData(); // Obtiene los datos de la fila
+                    alert(`Hiciste clic en la fila con ID: ${rowData.id}`); // Muestra un alert con el ID de la fila
+                },
                 columns: [
                     { title: "Nombre", field: "name", headerFilter: "input" },
                     { title: "Descripción", field: "description", headerFilter: "input" },
@@ -102,23 +85,38 @@
                         cellClick: function(e, cell) {
                             const rowData = cell.getRow().getData();
 
-                            if (e.target.classList.contains("edit-btn")) {
+                            if (e.target.classList.contains("edit-btn") || e.target.classList.contains("bi-pencil") ) {
                                 abrirFormularioEdicionEvento(rowData.id); // Función para abrir el formulario de edición
-                                return;
+                            
                             }
                             
-                            if (e.target.classList.contains("delete-btn")) {
+                            if (e.target.classList.contains("delete-btn") || e.target.classList.contains("bi-trash") ) {
                                 eliminarEvento(rowData.id); // Función para eliminar el evento
-                                return;
+                             
                             }
-
-                            
-
-                            
+ 
                         },
                     },
                 ],
-                data: eventsArray, // Los datos convertidos en un array
+                data: eventsArray,
+                rowFormatter: function(row) {
+                    const data = row.getData(); // Obtiene los datos de la fila
+
+                    // Asigna colores según el estado
+                    switch (data.status) {
+                        case "Programado":
+                            row.getElement().style.backgroundColor = "#fff68e"; 
+                            break;
+                        case "Terminado":
+                            row.getElement().style.backgroundColor = "#67c36f"; 
+                            break;
+                        case "Cancelado":
+                            row.getElement().style.backgroundColor = "#e17575"; 
+                            break;
+                        default:
+                            row.getElement().style.backgroundColor = ""; // Sin color
+                    }
+                }
             });
         })
         .catch(error => {
@@ -130,10 +128,7 @@
             });
         });
 
-
-
     }
-
 
     function eliminarEvento(eventId) {
         Swal.fire({
@@ -284,7 +279,6 @@
         });
     }
 
-
     // Función para abrir el formulario de creación
     function abrirFormularioCrearEvento() {
 
@@ -385,7 +379,6 @@
         });
     }
 
-
     function actualizarTabla() {
         fetchRequest('/events', {}, 'GET')
         .then(data => {
@@ -405,308 +398,6 @@
         });
     }
 
-    // async function actualizarLista(endpoint) {
-    //     try {
-
-    //         const data = await fetchRequest('/get_player_list', { endpoint: endpoint });
-
-
-    //         if (!data || !data.message || !data.message.result) {
-    //             throw new Error("Datos de jugadores no válidos");
-    //         }
-
-    //         table.setData(data.message.result);
-
-    //     } catch (error) {
-
-
-    //         console.error('Error en actualizarLista:', error);
-    //     }
-    // }
-
-
-    // function abrirFormularioMensajeMasivo() {
-    //     Swal.fire({
-    //         title: 'Enviar Mensaje Masivo',
-    //         input: 'textarea',
-    //         inputLabel: 'Escribe tu mensaje',
-    //         inputPlaceholder: 'Escribe aquí el mensaje que deseas enviar a todos los jugadores...',
-    //         showCancelButton: true,
-    //         confirmButtonText: 'Enviar',
-    //         cancelButtonText: 'Cancelar',
-    //         showLoaderOnConfirm: true,
-    //         preConfirm: async (mensaje) => {
-    //             if (!mensaje) {
-    //                 Swal.showValidationMessage('Por favor, escribe un mensaje.');
-    //                 return false;
-    //             }
-    //             return await enviarMensajeMasivo(mensaje);
-    //         },
-    //         allowOutsideClick: () => !Swal.isLoading()
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             Swal.fire({
-    //                 icon: 'success',
-    //                 title: 'Mensaje enviado',
-    //                 text: 'El mensaje se ha enviado correctamente a todos los jugadores.'
-    //             });
-    //         }
-    //     });
-    // }
-
-    // function abrirFormularioMensaje(player_id) {
-    //     Swal.fire({
-    //         title: 'Enviar Mensaje',
-    //         input: 'textarea',
-    //         inputLabel: 'Escribe tu mensaje',
-    //         inputPlaceholder: 'Escribe aquí el mensaje que deseas enviar...',
-    //         showCancelButton: true,
-    //         confirmButtonText: 'Enviar',
-    //         cancelButtonText: 'Cancelar',
-    //         showLoaderOnConfirm: true,
-    //         preConfirm: async (mensaje) => {
-    //             if (!mensaje) {
-    //                 Swal.showValidationMessage('Por favor, escribe un mensaje.');
-    //                 return false;
-    //             }
-    //             return await enviarMensajeJugador(mensaje, player_id);
-    //         },
-    //         allowOutsideClick: () => !Swal.isLoading()
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             Swal.fire({
-    //                 icon: 'success',
-    //                 title: 'Mensaje enviado',
-    //                 text: 'El mensaje se ha enviado correctamente al jugador'
-    //             });
-    //         }
-    //     });
-    // }
-
-    // function abrirFormularioKickeoMasivo() {
-    //     Swal.fire({
-    //         title: '¿Estás seguro?',
-    //         text: "Esta función permite kickear a todos los jugadores que no sean del clan. -- [v1]",
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonText: 'Sí, kickear',
-    //         cancelButtonText: 'Cancelar',
-    //         showLoaderOnConfirm: true,
-    //         preConfirm: async () => {
-
-    //             try {
-    //                 // Lógica para realizar el kickeo masivo
-    //                 const resultado = await realizarKickeoMasivo();
-    //                 return resultado;
-    //             } catch (error) {
-    //                 Swal.showValidationMessage('Error al realizar el kickeo masivo.');
-    //                 return false;
-    //             }
-    //         },
-    //         allowOutsideClick: () => !Swal.isLoading()
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             Swal.fire({
-    //                 icon: 'success',
-    //                 title: 'Kickeo masivo realizado',
-    //                 text: 'Los jugadores han sido kickeados correctamente.'
-    //             });
-    //         }
-    //     });
-    // }
-
-    // function abrirFormularioKickeoPlayer(player_name ) {
-    //     Swal.fire({
-    //         title: '¿Estás seguro?',
-    //         text: "Estás a punto de kickear al jugador: " + player_name,
-    //         icon: 'warning',
-    //         input: 'text', // Campo de texto
-    //         inputPlaceholder: 'Ingresa la razón del kickeo...', // Placeholder del campo de texto
-    //         inputValidator: (value) => {
-    //             // Validar que el campo no esté vacío
-    //             if (!value) {
-    //                 return 'Debes ingresar una razón para el kickeo.';
-    //             }
-    //         },
-    //         showCancelButton: true,
-    //         confirmButtonText: 'Sí, kickear',
-    //         cancelButtonText: 'Cancelar',
-    //         showLoaderOnConfirm: true,
-    //         preConfirm: async (razon) => { // El valor del campo de texto se pasa como parámetro
-    //             try {
-    //                 // Lógica para realizar el kickeo
-    //                 const resultado = await realizarKickeoPlayer(player_name, razon); // Pasar la razón al kickeo
-    //                 return resultado;
-    //             } catch (error) {
-    //                 Swal.showValidationMessage('Error al realizar el kickeo.');
-    //                 return false;
-    //             }
-    //         },
-    //         allowOutsideClick: () => !Swal.isLoading()
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             Swal.fire({
-    //                 icon: 'success',
-    //                 title: 'Jugador expulsado',
-    //                 text: 'El jugador ha sido kickeado correctamente.'
-    //             });
-    //         }
-    //     });
-
-    // }
-
-
-    // async function obtenerServerData(endpoint) {
-    //     try {
-    //         const response = await fetchRequest("/get_server_data", {
-    //             endpoint : endpoint
-    //         });
-
-    //         if (response.success) {
-    //             servidorInfo = response.message.result;
-    //             document.getElementById('total-registros').textContent = ` ${servidorInfo.player_count}`;
-    //             document.getElementById('nombre-servidor').textContent = ` ${servidorInfo.name.name}`;
-    //             document.getElementById('mapa').textContent = ` ${servidorInfo.current_map.map.pretty_name}`;
-    //         } else {
-    //             Swal.fire({
-    //                 icon: 'error',
-    //                 title: 'Error',
-    //                 text: 'Hubo un error al enviar el mensaje.'
-    //             });
-    //             return false;
-    //         }
-    //     } catch (error) {
-    //         console.error('Error:', error);
-    //         Swal.fire({
-    //             icon: 'error',
-    //             title: 'Error',
-    //             text: 'Hubo un error al enviar el mensaje.'
-    //         });
-    //         return false;
-    //     }
-    // }
-    // Función para enviar el mensaje masivo
-    // async function enviarMensajeMasivo(mensaje) {
-    //     const endpoint = document.getElementById('endpointSelector').value;
-
-    //     try {
-    //         const response = await fetchRequest("/message_masive_players", {
-    //             endpoint : endpoint,
-    //             message: mensaje
-    //         });
-
-    //         if (response.success) {
-    //             return true;
-    //         } else {
-    //             Swal.fire({
-    //                 icon: 'error',
-    //                 title: 'Error',
-    //                 text: 'Hubo un error al enviar el mensaje.'
-    //             });
-    //             return false;
-    //         }
-    //     } catch (error) {
-    //         console.error('Error:', error);
-    //         Swal.fire({
-    //             icon: 'error',
-    //             title: 'Error',
-    //             text: 'Hubo un error al enviar el mensaje.'
-    //         });
-    //         return false;
-    //     }
-    // }
-
-    // async function enviarMensajeJugador(mensaje, player_id) {
-    //     const endpoint = document.getElementById('endpointSelector').value;
-
-    //     try {
-    //         const response = await fetchRequest("/message_player", {
-    //             endpoint : endpoint,
-    //             message  : mensaje,
-    //             player_id: player_id
-    //         });
-
-    //         if (response.success) {
-    //             return true;
-    //         } else {
-    //             Swal.fire({
-    //                 icon: 'error',
-    //                 title: 'Error',
-    //                 text: 'Hubo un error al enviar el mensaje.'
-    //             });
-    //             return false;
-    //         }
-    //     } catch (error) {
-    //         console.error('Error:', error);
-    //         Swal.fire({
-    //             icon: 'error',
-    //             title: 'Error',
-    //             text: 'Hubo un error al enviar el mensaje.'
-    //         });
-    //         return false;
-    //     }
-    // }
-
-
-    // async function realizarKickeoPlayer(player_name ,mensaje = ""){
-    //     try {
-    //         const response = await fetchRequest("/kick_player", {
-    //             endpoint    : servidorEndpoint,
-    //             message     : mensaje,
-    //             player_name : player_name
-    //         });
-
-    //         if (response.success) {
-    //             return true;
-    //         } else {
-    //             Swal.fire({
-    //                 icon: 'error',
-    //                 title: 'Error',
-    //                 text: response.message
-    //             });
-    //             return false;
-    //         }
-    //     } catch (error) {
-    //         console.error('Error:', error);
-    //         Swal.fire({
-    //             icon: 'error',
-    //             title: 'Error',
-    //             text: 'Hubo un error al enviar el mensaje.'
-    //         });
-    //         return false;
-    //     }
-    // }
-
-    // async function realizarKickeoMasivo(mensaje = "") {
-    //     // const endpoint = document.getElementById('endpointSelector').value;
-
-    //     try {
-    //         const response = await fetchRequest("/kick_player_no_clan", {
-    //             endpoint : servidorEndpoint,
-    //             message  : mensaje
-    //         });
-
-    //         if (response.success) {
-    //             return true;
-    //         } else {
-    //             Swal.fire({
-    //                 icon: 'error',
-    //                 title: 'Error',
-    //                 text: response.message
-    //             });
-    //             return false;
-    //         }
-    //     } catch (error) {
-    //         console.error('Error:', error);
-    //         Swal.fire({
-    //             icon: 'error',
-    //             title: 'Error',
-    //             text: 'Hubo un error al enviar el mensaje.'
-    //         });
-    //         return false;
-    //     }
-    // }
-    
     async function fetchRequest(url, bodyData = {}, method = 'POST') {
         try {
             const options = {
@@ -736,15 +427,12 @@
     document.addEventListener('DOMContentLoaded', function () {
 
         getEvents();
-        // setInterval(obtenerInfoSV, 10000);
+        setInterval(actualizarTabla, 10000);
 
     });
 
 
-    function obtenerInfoSV() {
-        actualizarLista(servidorEndpoint);
-        obtenerServerData(servidorEndpoint);
-    }
+
 
 
 

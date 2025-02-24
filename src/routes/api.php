@@ -78,8 +78,11 @@ Flight::before('start', function() {
         '/auth', 
         '/login',
         '/',
-        '/CTM',
-        '/miembrosCTM',
+        '/uranium',
+        '/miembros',
+        '/events',
+        '/events/confirm',
+        '/eventos/asistencia'
     ];
 
     $currentRoute = Flight::request()->url;

@@ -19,6 +19,7 @@
             'path' => '/eventos',
             'children' => [
                 ['name' => 'Ver Eventos', 'path' => '/eventos/ver'],
+                ['name' => 'Asistencia TEST', 'path' => '/eventos/asistencia'],
                 // ['name' => 'Agregar Cliente', 'path' => '/Miembros/agregar'],
             ]
         ],

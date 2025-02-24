@@ -202,3 +202,24 @@ Flight::route('GET /eventos/ver', function() {
     ]);
 
 });
+
+Flight::route('GET /eventos/asistencia', function() {
+    
+    $view       = "events/events_attendance.php";
+    $footerView = "";
+    Flight::render('base.php', [
+        'title' => 'Eventos', 
+        'ForeignView' => true,
+        'content' =>$view , 
+        'footer' => $footerView,
+        'styles' => [
+            'https://cdnjs.cloudflare.com/ajax/libs/tabulator/6.3.0/css/tabulator_bootstrap5.min.css',
+            'https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css',
+        ],
+        'scripts' => [
+            'https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js', // Librería necesaria para esta vista
+         
+        ]
+    ]);
+
+});

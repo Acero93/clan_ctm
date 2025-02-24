@@ -52,7 +52,13 @@
 
     <div class="d-flex">
         <!-- Sidebar -->
-        <?php include "components/leftBar.php"; ?>
+
+        <?php
+            !isset($ForeignView) ? include "components/leftBar.php" : null;
+        ?>
+
+
+        <?php //include "components/leftBar.php"; ?>
 
 
         <!-- Main Content -->
