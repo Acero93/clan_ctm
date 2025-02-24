@@ -41,7 +41,7 @@ class EventModel {
         $event->server_ip           = $data['server_ip'];
         $event->expected_attendance = $data['expected_attendance'];
         $event->actual_attendance   = $data['actual_attendance'] ?? 0; // Valor predeterminado si no se proporciona
-        $event->status              = $data['status'] ?? 1;
+        $event->status              = $data['status'] ?? 'Programado';
         $event->updated_at          = date('Y-m-d H:i:s');
 
         if (empty($data['id'])) { // Verifica si no está definido o es falso (0, null, etc.)

@@ -31,6 +31,26 @@ class EventController {
     // Crear o actualizar un evento
     public function save() {
         $data         = Flight::request()->data->getData();
+
+
+        switch ($data['event_type']) {
+            case '0':
+                $data['event_type'] = 'Entrenamiento interno';
+                break;
+            case '1':
+                $data['event_type'] = 'Entrenamiento externo';
+                break;
+            case '2':
+                $data['event_type'] = 'Evento: CvC';
+                break;
+            case '3':
+                $data['event_type'] = 'Evento: Senado';
+                break;
+            case '4':
+                $data['event_type'] = 'Evento: Competitivo';
+                break;
+        }
+        
         $elementId    = EventModel::save($data);
         Flight::json(["success" => true, "status" => "success","message" => "Guardado correctamente", "id" => $elementId]);
     }

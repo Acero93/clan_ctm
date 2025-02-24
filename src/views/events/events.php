@@ -183,10 +183,21 @@
                         <label for="description">Descripción</label>
                         <textarea id="description" class="form-control">${eventData.description}</textarea>
                     </div>
+
+
+
                     <div class="form-group">
                         <label for="event_type">Tipo de Evento</label>
-                        <input type="text" id="event_type" class="form-control" value="${eventData.event_type}">
+                        <select id="event_type" class="form-control">
+                            <option value="0" ${eventData.event_type === 'Entrenamiento interno' ? 'selected' : ''}>Entrenamiento interno</option>
+                            <option value="1" ${eventData.event_type === 'Entrenamiento externo' ? 'selected' : ''}>Entrenamiento externo</option>
+                            <option value="2" ${eventData.event_type === 'Evento: CvC' ? 'selected' : ''}>Evento: CvC</option>
+                            <option value="3" ${eventData.event_type === 'Evento: Senado' ? 'selected' : ''}>Evento: Senado</option>
+                            <option value="4" ${eventData.event_type === 'Evento: Competitivo' ? 'selected' : ''}>Evento: Competitivo</option>
+                        </select>
                     </div>
+
+
                     <div class="form-group">
                         <label for="event_date">Fecha</label>
                         <input type="datetime-local" id="event_date" class="form-control" value="${eventData.event_date}">
@@ -203,10 +214,17 @@
                         <label for="actual_attendance">Asistencia Real</label>
                         <input type="number" id="actual_attendance" class="form-control" value="${eventData.actual_attendance}">
                     </div>
+
                     <div class="form-group">
                         <label for="status">Estado</label>
-                        <input type="text" id="status" class="form-control" value="${eventData.status}">
+                        <select id="status" class="form-control">
+                            <option value="Programado" ${eventData.status === 'Programado' ? 'selected' : ''}>Programado</option>
+                            <option value="Terminado" ${eventData.status === 'Terminado' ? 'selected' : ''}>Terminado</option>
+                            <option value="Cancelado" ${eventData.status === 'Cancelado' ? 'selected' : ''}>Cancelado</option>
+                        </select>
                     </div>
+
+                    
                 </form>
                 `,
                 showCancelButton: true,
@@ -297,10 +315,20 @@
                     <label for="description">Descripción</label>
                     <textarea id="description" class="form-control"></textarea>
                 </div>
+
+                
                 <div class="form-group">
                     <label for="event_type">Tipo de Evento</label>
-                    <input type="text" id="event_type" class="form-control">
+                    <select id="event_type" class="form-control">
+                        <option value="0">Entrenamiento interno</option>
+                        <option value="1">Entrenamiento externo</option>
+                        <option value="2">Evento: CvC</option>
+                        <option value="3">Evento: Senado</option>
+                        <option value="2">Evento: Competitivo</option>
+                    </select>
                 </div>
+
+
                 <div class="form-group">
                     <label for="event_date">Fecha</label>
                     <input type="datetime-local" id="event_date" class="form-control" min="${minDate}" required>
@@ -319,12 +347,11 @@
             confirmButtonText: 'Crear',
             cancelButtonText: 'Cancelar',
             preConfirm: () => {
-                const form = document.getElementById('create-event-form');
-
-
+                const form          = document.getElementById('create-event-form');
+                const event_type    = document.getElementById('event_type').value;
                 const eventDateInput = form.querySelector('#event_date');
-                const eventDate = new Date(eventDateInput.value); // Convertir a objeto Date
-                const now = new Date(); // Fecha y hora actual
+                const eventDate      = new Date(eventDateInput.value); // Convertir a objeto Date
+                const now            = new Date(); // Fecha y hora actual
 
                 // Validar que la fecha no sea anterior a la actual
                 if (eventDate < now) {
@@ -336,7 +363,7 @@
                 const newEventData = {
                     name: form.querySelector('#name').value,
                     description: form.querySelector('#description').value,
-                    event_type: form.querySelector('#event_type').value,
+                    event_type: event_type,
                     event_date: form.querySelector('#event_date').value,
                     server_ip: form.querySelector('#server_ip').value,
                     expected_attendance: parseInt(form.querySelector('#expected_attendance').value),
