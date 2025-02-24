@@ -183,9 +183,10 @@
                         <label for="description">Descripción</label>
                         <textarea id="description" class="form-control">${eventData.description}</textarea>
                     </div>
-
-
-
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" class="form-control" value="${eventData.password}" required>
+                    </div>
                     <div class="form-group">
                         <label for="event_type">Tipo de Evento</label>
                         <select id="event_type" class="form-control">
@@ -236,6 +237,7 @@
                         id: eventId, // Incluir el ID en el cuerpo de la solicitud
                         name: form.querySelector('#name').value,
                         description: form.querySelector('#description').value,
+                        password: form.querySelector('#password').value,
                         event_type: form.querySelector('#event_type').value,
                         event_date: form.querySelector('#event_date').value,
                         server_ip: form.querySelector('#server_ip').value,
@@ -316,7 +318,11 @@
                     <textarea id="description" class="form-control"></textarea>
                 </div>
 
-                
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" class="form-control" required>
+                </div>
+
                 <div class="form-group">
                     <label for="event_type">Tipo de Evento</label>
                     <select id="event_type" class="form-control">
@@ -347,11 +353,12 @@
             confirmButtonText: 'Crear',
             cancelButtonText: 'Cancelar',
             preConfirm: () => {
-                const form          = document.getElementById('create-event-form');
-                const event_type    = document.getElementById('event_type').value;
-                const eventDateInput = form.querySelector('#event_date');
-                const eventDate      = new Date(eventDateInput.value); // Convertir a objeto Date
-                const now            = new Date(); // Fecha y hora actual
+                const form              = document.getElementById('create-event-form');
+                const event_type        = document.getElementById('event_type').value;
+                const password          = form.getElementById('password').value;
+                const eventDateInput    = form.querySelector('#event_date');
+                const eventDate         = new Date(eventDateInput.value); // Convertir a objeto Date
+                const now               = new Date(); // Fecha y hora actual
 
                 // Validar que la fecha no sea anterior a la actual
                 if (eventDate < now) {
@@ -363,6 +370,7 @@
                 const newEventData = {
                     name: form.querySelector('#name').value,
                     description: form.querySelector('#description').value,
+                    password: password,
                     event_type: event_type,
                     event_date: form.querySelector('#event_date').value,
                     server_ip: form.querySelector('#server_ip').value,

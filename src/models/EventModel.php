@@ -7,10 +7,10 @@ class EventModel {
 
     // Obtener todos los eventos
     public static function getAll() {
-        // return \R::findAll('events');
+       
 
         $sql = "
-            SELECT * 
+            SELECT id, name, description, event_type, event_date, server_ip, expected_attendance, actual_attendance, status, updated_at, created_at
             FROM events 
             ORDER BY 
                 CASE 
@@ -27,8 +27,14 @@ class EventModel {
     }
 
     // Obtener un evento por ID
-    public static function getById($id) {
-        return \R::load('events', $id);
+    public static function getById($id , $show_password = false) {
+        $event = \R::load('events', $id);
+
+        if (!$show_password) {
+            unset($event->password);
+        }
+
+        return $event;
     }
 
     // Crear o actualizar un evento
@@ -36,6 +42,7 @@ class EventModel {
         $event = \R::load('events', $data['id'] ?? 0);
         $event->name                = $data['name'];
         $event->description         = $data['description'];
+        $event->password            = $data['password'];
         $event->event_type          = $data['event_type'];
         $event->event_date          = $data['event_date'];
         $event->server_ip           = $data['server_ip'];
@@ -164,10 +171,15 @@ class EventModel {
         }
 
         \R::store($event);
+        \R::store($attendance);
+
+        if(!$data['confirmado']){
+            unset($event->password);
+        }
 
         return ([
             "error" => false,
-            "message" => \R::store($attendance)
+            "message" => $event
         ]);
     
 

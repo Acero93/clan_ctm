@@ -199,6 +199,7 @@
                 
                 const motivo        = document.getElementById('motivo').value;
                 const participacion = document.getElementById('participacion').value;
+
                 // Aquí puedes enviar la confirmación de asistencia al servidor
                 return fetchRequest('/events/confirm', {
                     id              : evento.id,
@@ -215,11 +216,16 @@
                         throw new Error(response.message);
                     }
                     
+                    let texto = "Tu respuesta ha sido registrada correctamente";
+
+                    if(response.message.password){
+                        texto += ". La contraseña para la partida es: " + response.message.password;
+                    }
 
                     Swal.fire({
                         icon: 'success',
                         title: 'Respuesta enviada',
-                        text: 'Tu respuesta ha sido registrada correctamente.',
+                        text: texto,
                     });
 
 

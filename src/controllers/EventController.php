@@ -111,7 +111,7 @@ class EventController {
             return;
         }
         
-        Flight::json(["success" => true, "status" => "success", "message" => "Registro enviado"]);
+        Flight::json(["success" => true, "status" => "success", "message" =>  $result['message'] ]);
 
     }
 }
