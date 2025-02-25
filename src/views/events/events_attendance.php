@@ -161,7 +161,7 @@
             <p><strong>Descripción:</strong> ${evento.description}</p>
             <p><strong>Fecha:</strong> ${evento.event_date}</p>
             <p><strong>Asistencias Confirmadas:</strong> ${evento.actual_attendance}</p>
-            <p><strong>IP del Servidor:</strong> ${evento.server_ip}</p>
+            <p><strong>Nombre del Servidor:</strong> ${evento.server_ip}</p>
             <br>
             <div class="form-group">
                 <label for="participacion">¿Participarás en el evento?</label>

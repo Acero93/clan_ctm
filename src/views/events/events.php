@@ -204,7 +204,7 @@
                         <input type="datetime-local" id="event_date" class="form-control" value="${eventData.event_date}">
                     </div>
                     <div class="form-group">
-                        <label for="server_ip">IP del Servidor</label>
+                        <label for="server_ip">Nombre del Servidor</label>
                         <input type="text" id="server_ip" class="form-control" value="${eventData.server_ip}">
                     </div>
                     <div class="form-group">
@@ -340,7 +340,7 @@
                     <input type="datetime-local" id="event_date" class="form-control" min="${minDate}" required>
                 </div>
                 <div class="form-group">
-                    <label for="server_ip">IP del Servidor</label>
+                    <label for="server_ip">Nombre del Servidor</label>
                     <input type="text" id="server_ip" class="form-control">
                 </div>
                 <div class="form-group">
