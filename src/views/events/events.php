@@ -340,7 +340,7 @@
                     <input type="datetime-local" id="event_date" class="form-control" min="${minDate}" required>
                 </div>
                 <div class="form-group">
-                    <label for="server_ip">Nombre del Servidor</label>
+                    <label for="server_ip">Nombre</label>
                     <input type="text" id="server_ip" class="form-control">
                 </div>
                 <div class="form-group">
@@ -355,7 +355,7 @@
             preConfirm: () => {
                 const form              = document.getElementById('create-event-form');
                 const event_type        = document.getElementById('event_type').value;
-                const password          = form.getElementById('password').value;
+                const password          = document.getElementById('password').value;
                 const eventDateInput    = form.querySelector('#event_date');
                 const eventDate         = new Date(eventDateInput.value); // Convertir a objeto Date
                 const now               = new Date(); // Fecha y hora actual
