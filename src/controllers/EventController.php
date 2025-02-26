@@ -83,27 +83,13 @@ class EventController {
     public function attendance(){
 
         $data       = Flight::request()->data->getData();
-
-
-
-
         if(empty($data['game_id']) && empty($data['in_game_name'])){
 
             Flight::json(["success" => false, "status" => "error", "message" => "Faltan datos ID del jugador o Nombre en el juego."]); 
             return;
         }
 
-
-
-
-        // print_r(empty($data['game_id']));
-        
-
-
         $result     = EventModel::attendance($data);
-
-
-        // print_r($result);
 
         if($result['error']){
 
@@ -114,4 +100,5 @@ class EventController {
         Flight::json(["success" => true, "status" => "success", "message" =>  $result['message'] ]);
 
     }
+
 }

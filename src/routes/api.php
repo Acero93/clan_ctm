@@ -43,6 +43,7 @@ Flight::route('POST /auth', function() {
         session_start();
         $_SESSION['jwt_token'] = $token;
 
+
         // Devuelve el mensaje de login exitoso con la ruta protegida
         Flight::json(["message" => "Login exitoso", "path" => "/base", "token" => $token]);
     } else {
@@ -69,41 +70,39 @@ Flight::route('GET /logout', function() {
 }); 
 
 
+// Flight::before('start', function() {
+//     // Las rutas que no requieren verificación de token
+//     $allowedRoutes = [
+//         '/get_hll_sv_status',
+//         '/auth', 
+//         '/login',
+//         '/',
+//         '/uranium',
+//         '/miembros',
+//         '/events',
+//         '/events/confirm',
+//         '/eventos/asistencia'
+//     ];
 
+//     $currentRoute = Flight::request()->url;
 
-Flight::before('start', function() {
-    // Las rutas que no requieren verificación de token
-    $allowedRoutes = [
-        '/get_hll_sv_status',
-        '/auth', 
-        '/login',
-        '/',
-        '/uranium',
-        '/miembros',
-        '/events',
-        '/events/confirm',
-        '/eventos/asistencia'
-    ];
+//     if (in_array($currentRoute, $allowedRoutes)) {
+//         return;  
+//     }
 
-    $currentRoute = Flight::request()->url;
-
-    if (in_array($currentRoute, $allowedRoutes)) {
-        return;  
-    }
-
-    session_start();
+//     session_start();
  
     
-    if (!isset($_SESSION['jwt_token'])) {
-        Flight::halt(401, json_encode(["message" => "Falta token"]));
-    }
+//     if (!isset($_SESSION['jwt_token'])) {
+//         Flight::halt(401, json_encode(["message" => "Falta token"]));
+//     }
 
-    $token = $_SESSION['jwt_token'];
-    $userData = JwtHandler::decode($token);
+//     $token = $_SESSION['jwt_token'];
+//     $userData = JwtHandler::decode($token);
 
-    if (!$userData) {
-        Flight::render('login.php', ['title' => 'Login CTM']);
-    }
+//     if (!$userData) {
+//         Flight::render('login.php', ['title' => 'Login CTM']);
+//     }
 
-    Flight::set('user', $userData);
-});
+//     Flight::set('user', $userData);
+// });
