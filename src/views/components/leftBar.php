@@ -7,11 +7,11 @@
             'children' => [] // Sin submenús
         ],
         [
-            'name' => 'Miembros',
-            'path' => '/miembros',
+            'name' => 'Players',
+            'path' => '/players',
             'children' => [
-                ['name' => 'Ver Miembros', 'path' => '/miembros/ver'],
-                // ['name' => 'Agregar Cliente', 'path' => '/Miembros/agregar'],
+                ['name' => 'Ver Players', 'path' => '/players/ver'],
+                ['name' => 'Crear Player', 'path' => '/players/crear'],
             ]
         ],
         [

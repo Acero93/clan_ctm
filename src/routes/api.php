@@ -6,9 +6,9 @@ use Firebase\JWT\JWT;
 
 
 //require "web.php";
-//require "MemberApi.php";
 //require "HLLServerApi.php";
 //require "CTMWebAPI.php";
+require "PlayerApi.php";
 require "EventsApi.php";
 
 
