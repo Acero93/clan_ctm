@@ -47,7 +47,7 @@
             animation: float 3s ease-in-out infinite;
             margin-top: -15vh;
             opacity: 0; 
-            transition: opacity 20s ease-in-out; 
+            transition: opacity 15s ease-in-out; 
         }
 
     
@@ -202,13 +202,14 @@
 
     </div>
 
+    <div id="youtube-player"></div>
 
-    <audio id="miAudio">
+    <!-- <audio id="miAudio">
         <source src="public/assets/audios/uranium_1_noche_oscura.mp3" type="audio/mpeg">
         Tu navegador no soporta el elemento de audio.
-    </audio>
+    </audio> -->
 
-    <!-- Bootstrap 5 JS (opcional, si necesitas funcionalidades de BS) -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
@@ -217,16 +218,51 @@
         var imgContainer = document.querySelector('.img-container');
         imgContainer.classList.add('fade-in');
 
-        window.addEventListener('DOMContentLoaded', () => {
+        // window.addEventListener('DOMContentLoaded', () => {
 
 
-            const audio = document.getElementById('miAudio');
-            audio.play().catch(error => {
-                console.error("El navegador bloqueó la reproducción automática: ", error);
+        //     const audio = document.getElementById('miAudio');
+        //     audio.play().catch(error => {
+        //         console.error("El navegador bloqueó la reproducción automática: ", error);
+        //     });
+
+        // });
+
+
+
+              // Cargar la API de YouTube
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // Variables para el reproductor
+        var player;
+
+        // Función que se ejecuta cuando la API está lista
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '0', // Altura 0 para que no sea visible
+                width: '0',  // Ancho 0 para que no sea visible
+                videoId: 'Pb9cOAnw6Y4', // Reemplaza con el ID de tu video
+                playerVars: {
+                    autoplay: 1,       // Autoreproducir
+                    controls: 0,       // Ocultar controles
+                    modestbranding: 1, // Ocultar logo de YouTube
+                    rel: 0,            // No mostrar videos relacionados al final
+                    enablejsapi: 1,     // Habilitar la API
+                    start: 9   
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
             });
+        }
 
-        });
-
+        // Función que se ejecuta cuando el reproductor está listo
+        function onPlayerReady(event) {
+            event.target.playVideo(); // Reproducir el video
+        }
 
 
 
