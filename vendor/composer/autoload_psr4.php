@@ -30,6 +30,7 @@ return array(
     'ParagonIE\\ConstantTime\\' => array($vendorDir . '/paragonie/constant_time_encoding/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Models\\' => array($baseDir . '/src/models'),
+    'Masterminds\\' => array($vendorDir . '/masterminds/html5/src'),
     'MabeEnum\\' => array($vendorDir . '/marc-mabe/php-enum/src'),
     'JsonSchema\\' => array($vendorDir . '/justinrainbow/json-schema/src/JsonSchema'),
     'Icecave\\Repr\\' => array($vendorDir . '/icecave/repr/src'),

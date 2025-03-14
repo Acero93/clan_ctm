@@ -8,6 +8,7 @@ use flight\net\Response;
 use flight\net\Router;
 use flight\template\View;
 use flight\net\Route;
+use flight\core\EventDispatcher;
 
 require_once __DIR__ . '/autoload.php';
 
@@ -23,11 +24,14 @@ require_once __DIR__ . '/autoload.php';
  * @method static void stop(?int $code = null) Stops the framework and sends a response.
  * @method static void halt(int $code = 200, string $message = '', bool $actuallyExit = true)
  * Stop the framework with an optional status code and message.
- * @method static void register(string $name, string $class, array $params = [], ?callable $callback = null)
+ * @method static void register(string $name, string $class, array<int, mixed> $params = [], ?callable $callback = null)
  * Registers a class to a framework method.
  * @method static void unregister(string $methodName)
  * Unregisters a class to a framework method.
  * @method static void registerContainerHandler(callable|object $containerHandler) Registers a container handler.
+ *
+ * # Class registration
+ * @method EventDispatcher eventDispatcher() Gets event dispatcher
  *
  * # Routing
  * @method static Route route(string $pattern, callable|string $callback, bool $pass_route = false, string $alias = '')
@@ -42,18 +46,19 @@ require_once __DIR__ . '/autoload.php';
  * Routes a PATCH URL to a callback function.
  * @method static Route delete(string $pattern, callable|string $callback, bool $pass_route = false, string $alias = '')
  * Routes a DELETE URL to a callback function.
- * @method static void resource(string $pattern, string $controllerClass, array $methods = [])
+ * @method static void resource(string $pattern, string $controllerClass, array<string, string|array<string>> $methods = [])
  * Adds standardized RESTful routes for a controller.
  * @method static Router router() Returns Router instance.
  * @method static string getUrl(string $alias, array<string, mixed> $params = []) Gets a url from an alias
- *
  * @method static void map(string $name, callable $callback) Creates a custom framework method.
  *
+ * # Filters
  * @method static void before(string $name, Closure(array<int, mixed> &$params, string &$output): (void|false) $callback)
  * Adds a filter before a framework method.
  * @method static void after(string $name, Closure(array<int, mixed> &$params, string &$output): (void|false) $callback)
  * Adds a filter after a framework method.
  *
+ * # Variables
  * @method static void set(string|iterable<string, mixed> $key, mixed $value) Sets a variable.
  * @method static mixed get(?string $key) Gets a variable.
  * @method static bool has(string $key) Checks if a variable is set.
@@ -63,6 +68,10 @@ require_once __DIR__ . '/autoload.php';
  * @method static void render(string $file, ?array<string, mixed> $data = null, ?string $key = null)
  * Renders a template file.
  * @method static View view() Returns View instance.
+ *
+ * # Events
+ * @method void onEvent(string $event, callable $callback) Registers a callback for an event.
+ * @method void triggerEvent(string $event, ...$args) Triggers an event.
  *
  * # Request-Response
  * @method static Request request() Returns Request instance.
@@ -86,9 +95,6 @@ class Flight
 {
     /** Framework engine. */
     private static Engine $engine;
-
-    /** Whether or not the app has been initialized. */
-    private static bool $initialized = false;
 
     /**
      * Don't allow object instantiation
@@ -127,14 +133,7 @@ class Flight
     /** @return Engine Application instance */
     public static function app(): Engine
     {
-        if (!self::$initialized) {
-            require_once __DIR__ . '/autoload.php';
-
-            self::setEngine(new Engine());
-            self::$initialized = true;
-        }
-
-        return self::$engine;
+        return self::$engine ?? self::$engine = new Engine();
     }
 
     /**

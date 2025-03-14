@@ -14,7 +14,7 @@
     <style>
         body {
             background-color: #000;
-            color: #fff;
+            color: #2b3e42;
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -32,15 +32,23 @@
         }
         @keyframes glow {
             from {
-                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ffeb3b, 0 0 40px #ffeb3b, 0 0 50px #ffeb3b, 0 0 60px #ffeb3b, 0 0 70px #ffeb3b;
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #040403, 0 0 40px #ffeb3b, 0 0 50px #ffeb3b, 0 0 60px #ffeb3b, 0 0 70px #ffeb3b;
             }
             to {
-                text-shadow: 0 0 20px #fff, 0 0 30px #ffeb3b, 0 0 40px #ffeb3b, 0 0 50px #ffeb3b, 0 0 60px #ffeb3b, 0 0 70px #ffeb3b, 0 0 80px #ffeb3b;
+                text-shadow: 0 0 20px #fff, 0 0 30px #ffeb3b, 0 0 40px #716d47, 0 0 50px #ffeb3b, 0 0 60px #dc3545, 0 0 70px #a09219, 0 0 80px #b6af6e;
             }
+            
         }
         .img-container {
             animation: float 3s ease-in-out infinite;
             margin-top: -15vh;
+            opacity: 0; /* Inicialmente invisible */
+            transition: opacity 15s ease-in-out; /* Transición de 2 segundos */
+        }
+
+        /* Clase para hacer la imagen visible */
+        .img-container.fade-in {
+            opacity: 1; /* Completamente visible */
         }
 
         @keyframes float {
@@ -118,8 +126,14 @@
         }
 
         .img-fluid{
+            margin-top: 10%;
             width: 34%;
-            margin-bottom:5%
+            margin-bottom: 5%;
+        }
+
+        .icon_ {
+            color: #2b3f41 !important; 
+            transition: all 0.3s ease;
         }
 
     </style>
@@ -127,7 +141,7 @@
 <body>
     <div class="container text-center">
         <div class="img-container">
-            <img src="https://i.imgur.com/JRi5mVt.png" alt="Uranium - Sitio en Construcción" class="img-fluid">
+            <img src="https://i.imgur.com/3jRip24.png" alt="Uranium - Sitio en Construcción" class="img-fluid">
         </div>
         <div class="construction-text nuclear-theme">
             URANIUM: !EL FRENTE ESTÁ ACTIVO!
@@ -174,17 +188,41 @@
         </div>
 
         <div class="social-icons mt-4">
-            <a href="https://facebook.com" target="_blank" class="social-icon me-3">
-                <i class="bi bi-facebook" style="color: #ffcc00; transition: all 0.3s ease;"></i>
+            <a href="https://www.facebook.com/groups/1115060145604499" target="_blank" class="social-icon me-3">
+                <i class="bi bi-facebook icon_" ></i>
             </a>
-            <a href="https://discord.com" target="_blank" class="social-icon">
-                <i class="bi bi-discord" style="color: #ffcc00; transition: all 0.3s ease;"></i>
+            <a href="https://discord.uraniumhll.cl/" target="_blank" class="social-icon">
+                <i class="bi bi-discord icon_" ></i>
             </a>
         </div>
 
     </div>
 
+
+    <audio id="miAudio">
+        <source src="public/assets/audios/uranium_1_noche_oscura.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
     <!-- Bootstrap 5 JS (opcional, si necesitas funcionalidades de BS) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const audio = document.getElementById('miAudio');
+            audio.play().catch(error => {
+                console.error("El navegador bloqueó la reproducción automática: ", error);
+            });
+
+            var imgContainer = document.querySelector('.img-container');
+
+            // Agregar la clase 'fade-in' para hacer la imagen visible
+            imgContainer.classList.add('fade-in');
+        });
+
+
+    </script>
+
 </body>
 </html>
