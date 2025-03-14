@@ -209,10 +209,12 @@
     
     <script>
 
+
+        var imgContainer = document.querySelector('.img-container');
+        imgContainer.classList.add('fade-in');
+
         window.addEventListener('DOMContentLoaded', () => {
 
-            var imgContainer = document.querySelector('.img-container');
-            imgContainer.classList.add('fade-in');
 
             const audio = document.getElementById('miAudio');
             audio.play().catch(error => {
@@ -228,4 +230,4 @@
     </script>
 
 </body>
-</html>g
+</html>
