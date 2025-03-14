@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uranium - HLL - Chile</title>
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://i.imgur.com/JRi5mVt.png">
+    <link rel="icon" type="image/png" href="https://i.imgur.com/3jRip24.png">
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Font: Bebas Neue (estilo militar) -->
@@ -200,7 +200,7 @@
 
 
     <audio id="miAudio">
-        <source src="public/assets/audios/uranium_1_noche_oscura.mp3" type="audio/mpeg">
+        <source src="/public/assets/audios/uranium_1_noche_oscura.mp3" type="audio/mpeg">
         Tu navegador no soporta el elemento de audio.
     </audio>
 
