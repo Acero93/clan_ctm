@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uranium - Sitio en Construcción</title>
+    <title>Uranium - HLL - Chile</title>
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://i.imgur.com/JRi5mVt.png">
     <!-- Bootstrap 5 CSS -->
@@ -42,13 +42,13 @@
         .img-container {
             animation: float 3s ease-in-out infinite;
             margin-top: -15vh;
-            opacity: 0; /* Inicialmente invisible */
-            transition: opacity 15s ease-in-out; /* Transición de 2 segundos */
+            opacity: 0; 
+            transition: opacity 20s ease-in-out; 
         }
 
-        /* Clase para hacer la imagen visible */
+    
         .img-container.fade-in {
-            opacity: 1; /* Completamente visible */
+            opacity: 1; 
         }
 
         @keyframes float {
@@ -210,19 +210,22 @@
     <script>
 
         window.addEventListener('DOMContentLoaded', () => {
+
+            var imgContainer = document.querySelector('.img-container');
+            imgContainer.classList.add('fade-in');
+
             const audio = document.getElementById('miAudio');
             audio.play().catch(error => {
                 console.error("El navegador bloqueó la reproducción automática: ", error);
             });
 
-            var imgContainer = document.querySelector('.img-container');
-
-            // Agregar la clase 'fade-in' para hacer la imagen visible
-            imgContainer.classList.add('fade-in');
         });
+
+
+
 
 
     </script>
 
 </body>
-</html>
+</html>g
