@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uranium - HLL - Chile</title>
+    <base href="<?php echo $_ENV['HOST_WEB'] ?>">
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://i.imgur.com/3jRip24.png">
     <!-- Bootstrap 5 CSS -->
@@ -11,6 +12,9 @@
     <!-- Google Font: Bebas Neue (estilo militar) -->
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+
     <style>
         body {
             background-color: #000;
@@ -200,7 +204,7 @@
 
 
     <audio id="miAudio">
-        <source src="/public/assets/audios/uranium_1_noche_oscura.mp3" type="audio/mpeg">
+        <source src="public/assets/audios/uranium_1_noche_oscura.mp3" type="audio/mpeg">
         Tu navegador no soporta el elemento de audio.
     </audio>
 
