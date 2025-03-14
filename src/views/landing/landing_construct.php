@@ -140,9 +140,81 @@
             transition: all 0.3s ease;
         }
 
+
+        /* Estilos para las explosiones */
+        /* Estilos para las explosiones */
+        .explosion {
+            position: absolute;
+            width: 200px; /* Tamaño más grande */
+            height: 200px;
+            background: radial-gradient(
+                circle,
+                rgba(255, 200, 50, 0.3) 0%, /* Amarillo translúcido */
+                rgba(255, 150, 0, 0.2) 50%, /* Naranja translúcido */
+                rgba(255, 100, 0, 0.1) 100% /* Rojo translúcido */
+            );
+            border-radius: 50%; /* Forma circular */
+            opacity: 0; /* Inicialmente invisible */
+            animation: explosion 3s ease-out infinite; /* Animación más lenta */
+            transform: scale(0); /* Comienza pequeño */
+        }
+
+        /* Animación de explosión */
+        @keyframes explosion {
+            0% {
+                opacity: 0.3; /* Opacidad inicial */
+                transform: scale(0);
+            }
+            50% {
+                opacity: 0.2; /* Opacidad media */
+                transform: scale(1.5); /* Crecimiento máximo */
+            }
+            100% {
+                opacity: 0; /* Desvanecimiento total */
+                transform: scale(2); /* Tamaño final */
+            }
+        }
+
+
+
+        /* Contenedor del GIF de humo */
+        .humo-container {
+            position: fixed;
+            bottom: 0; /* Coloca el GIF en la parte inferior */
+            left: 0;
+            width: 100%; /* Ocupa todo el ancho de la pantalla */
+            z-index: 0; /* Asegura que el humo esté detrás del contenido */
+            overflow: hidden; /* Evita desbordamientos */
+        }
+
+        /* Contenedor del video de fondo */
+        .video-container {
+            position: fixed; /* Fija el video en la pantalla */
+            top: 0;
+            left: 0;
+            width: 100%; /* Ocupa todo el ancho */
+            height: 100%; /* Ocupa todo el alto */
+            z-index: -2; /* Coloca el video detrás del contenido */
+            overflow: hidden; /* Evita desbordamientos */
+        }
+
+        /* Estilos para el video de fondo */
+        .video-fondo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ajusta el video para cubrir todo el contenedor */
+            opacity: 0.5; /* Transparencia del 50% */
+        }
+
+
     </style>
 </head>
 <body>
+
+
+    <div id="efecto-explosiones"></div>
+    
+
     <div class="container text-center">
         <div class="img-container">
             <img src="https://i.imgur.com/3jRip24.png" alt="Uranium - Sitio en Construcción" class="img-fluid">
@@ -202,13 +274,15 @@
 
     </div>
 
+
+    <div class="video-container">
+        <video autoplay loop muted class="video-fondo">
+            <source src="https://i.imgur.com/hcGhnJT.mp4" type="video/mp4">
+            Tu navegador no soporta videos.
+        </video>
+    </div>
+
     <div id="youtube-player"></div>
-
-    <!-- <audio id="miAudio">
-        <source src="public/assets/audios/uranium_1_noche_oscura.mp3" type="audio/mpeg">
-        Tu navegador no soporta el elemento de audio.
-    </audio> -->
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
@@ -218,39 +292,24 @@
         var imgContainer = document.querySelector('.img-container');
         imgContainer.classList.add('fade-in');
 
-        // window.addEventListener('DOMContentLoaded', () => {
-
-
-        //     const audio = document.getElementById('miAudio');
-        //     audio.play().catch(error => {
-        //         console.error("El navegador bloqueó la reproducción automática: ", error);
-        //     });
-
-        // });
-
-
-
-              // Cargar la API de YouTube
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-        // Variables para el reproductor
         var player;
 
-        // Función que se ejecuta cuando la API está lista
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
-                height: '0', // Altura 0 para que no sea visible
-                width: '0',  // Ancho 0 para que no sea visible
-                videoId: 'Pb9cOAnw6Y4', // Reemplaza con el ID de tu video
+                height: '0',
+                width: '0',  
+                videoId: 'Pb9cOAnw6Y4', 
                 playerVars: {
-                    autoplay: 1,       // Autoreproducir
-                    controls: 0,       // Ocultar controles
-                    modestbranding: 1, // Ocultar logo de YouTube
-                    rel: 0,            // No mostrar videos relacionados al final
-                    enablejsapi: 1,     // Habilitar la API
+                    autoplay: 1,       
+                    controls: 0,       
+                    modestbranding: 1, 
+                    rel: 0,            
+                    enablejsapi: 1,     
                     start: 9   
                 },
                 events: {
@@ -264,6 +323,43 @@
             event.target.playVideo(); // Reproducir el video
         }
 
+
+        // Función para crear una explosión
+        function crearExplosion() {
+            const explosion = document.createElement('div');
+            explosion.classList.add('explosion');
+
+            // Posición aleatoria en la pantalla
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            explosion.style.left = `${x}px`;
+            explosion.style.top = `${y}px`;
+
+            // Tamaño aleatorio (entre 150px y 300px)
+            const tamaño = Math.random() * 900 + 900;
+            explosion.style.width = `${tamaño}px`;
+            explosion.style.height = `${tamaño}px`;
+
+            // Duración aleatoria de la animación (entre 2 y 4 segundos)
+            const duracion = Math.random() * 4 + 2;
+            explosion.style.animationDuration = `${duracion}s`;
+
+            // Añadir la explosión al contenedor
+            document.getElementById('efecto-explosiones').appendChild(explosion);
+
+            // Eliminar la explosión después de que termine la animación
+            setTimeout(() => {
+                explosion.remove();
+            }, duracion * 1000);
+        }
+
+        // Crear explosiones de forma continua
+        function iniciarExplosiones() {
+            setInterval(crearExplosion, 3500); // Crear una explosión cada segundo
+        }
+
+        // Iniciar el efecto cuando la página cargue
+        window.onload = iniciarExplosiones;
 
 
 
