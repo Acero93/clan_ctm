@@ -1,7 +1,7 @@
 <?php
 
 namespace Models;
-require_once __DIR__ . '/../../libs/rb.php';
+// require_once __DIR__ . '/../../libs/rb.php';
 
 class TacticalModel {
 
